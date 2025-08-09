@@ -1,0 +1,22 @@
+.border-gradient {
+  border-width: 1px;
+  border-style: solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(to bottom, #84f729, #15bffd);
+}
+.clip-bottom-right {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 42px),
+    calc(100% - 56px) 100%,
+    0 100%
+  );
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
