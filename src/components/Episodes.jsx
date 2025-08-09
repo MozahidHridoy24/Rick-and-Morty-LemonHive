@@ -3,18 +3,20 @@ import axios from "axios";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "../utils/style.css";
 
-const Characters = () => {
-  const [characters, setCharacters] = useState([]);
+const Episodes = () => {
+  const [episodes, setepisodes] = useState([]);
   const scrollRef = useRef(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
 
   useEffect(() => {
     axios
-      .get("https://rickandmortyapi.com/api/character")
-      .then((res) => setCharacters(res.data.results))
+      .get("https://rickandmortyapi.com/api/episode")
+      .then((res) => setepisodes(res.data.results))
       .catch((err) => console.error(err));
   }, []);
+
+  console.log("episodes", episodes);
 
   // Check scroll position to enable/disable arrows
   const checkForScrollPosition = () => {
@@ -26,7 +28,7 @@ const Characters = () => {
 
   useEffect(() => {
     checkForScrollPosition();
-  }, [characters]);
+  }, [episodes]);
 
   // Scroll left/right by one card width (including gap)
   const scrollBy = (direction) => {
@@ -46,7 +48,7 @@ const Characters = () => {
   return (
     <div className="px-8">
       <div className="px-8 py-12 relative">
-        <h2 className="text-2xl text-white font-medium mb-6">Meet The Cast</h2>
+        <h2 className="text-2xl text-white font-medium mb-6"></h2>
 
         {/* Prev button */}
         {canScrollLeft && (
@@ -66,20 +68,16 @@ const Characters = () => {
           className="flex overflow-x-auto no-scrollbar gap-4 scroll-smooth"
           style={{ scrollSnapType: "x mandatory" }}
         >
-          {characters.map((char) => (
+          {episodes.map((episode) => (
             <div
-              key={char.id}
+              key={episode.id}
               className="rounded-lg clip-bottom-right p-[1px] bg-gradient-to-b from-[#84F729] to-[#15BFFD] flex-shrink-0 flex flex-col items-center"
               style={{ scrollSnapAlign: "start", width: "16rem" }}
             >
-              <div className="bg-gray-800 w-full h-64 rounded-lg p-4 flex flex-col items-center">
-                <img
-                  src={char.image}
-                  alt={char.name}
-                  className="w-full h-40 object-cover rounded-sm mb-2"
-                />
-                <h3 className="w-full mt-4 text-start font-medium text-white ">
-                  {char.name}
+              <div className="bg-gray-800 text-white w-full h-24 rounded-lg p-4 flex flex-col items-center">
+                <p className="w-full text-start">{episode.episode}</p>
+                <h3 className="w-full text-start font-medium text-white ">
+                  {episode.name}
                 </h3>
               </div>
             </div>
@@ -100,4 +98,4 @@ const Characters = () => {
     </div>
   );
 };
-export default Characters;
+export default Episodes;

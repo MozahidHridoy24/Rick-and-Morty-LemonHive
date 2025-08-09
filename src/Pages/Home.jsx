@@ -2,6 +2,7 @@ import React from "react";
 import Hero from "../components/Hero";
 import bgImage from "../assets/Backgraund.png";
 import Characters from "../components/Characters";
+import Episodes from "../components/Episodes";
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
     >
       <Hero />
       <Characters />
+      <Episodes />
     </div>
   );
 };
