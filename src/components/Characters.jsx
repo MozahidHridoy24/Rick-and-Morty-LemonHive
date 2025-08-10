@@ -1,13 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "../utils/style.css";
+import ScrollButtons from "./ScrollButtons";
 
 const Characters = () => {
   const [characters, setCharacters] = useState([]);
-  const scrollRef = useRef(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
 
   useEffect(() => {
     axios
@@ -16,63 +13,18 @@ const Characters = () => {
       .catch((err) => console.error(err));
   }, []);
 
-  // Check scroll position to enable/disable arrows
-  const checkForScrollPosition = () => {
-    const el = scrollRef.current;
-    if (!el) return;
-    setCanScrollLeft(el.scrollLeft > 0);
-    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth);
-  };
-
-  useEffect(() => {
-    checkForScrollPosition();
-  }, [characters]);
-
-  // Scroll left/right by one card width (including gap)
-  const scrollBy = (direction) => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const cardWidth = el.firstChild
-      ? el.firstChild.offsetWidth + 16 /* gap */
-      : 300;
-    const scrollAmount = direction === "next" ? cardWidth : -cardWidth;
-
-    el.scrollBy({ left: scrollAmount, behavior: "smooth" });
-
-    // Wait for scroll to finish then update button visibility
-    setTimeout(checkForScrollPosition, 300);
-  };
-
   return (
     <div className="px-8">
       <div className="px-8 py-12 relative">
         <h2 className="text-2xl text-white font-medium mb-6">Meet The Cast</h2>
-
-        {/* Prev button */}
-        {canScrollLeft && (
-          <button
-            onClick={() => scrollBy("prev")}
-            className="absolute left-2 top-1/2 -translate-y-1 bg-white bg-opacity-70 p-2 rounded-full z-10 hover:bg-opacity-90"
-            aria-label="Previous"
-          >
-            <FaChevronLeft className="text-[#9DFE00]" />
-          </button>
-        )}
-
-        {/* Cards container */}
-        <div
-          ref={scrollRef}
-          onScroll={checkForScrollPosition}
-          className="flex overflow-x-auto no-scrollbar gap-4 scroll-smooth"
-          style={{ scrollSnapType: "x mandatory" }}
-        >
+        <ScrollButtons>
           {characters.map((char) => (
             <div
               key={char.id}
               className="rounded-lg clip-bottom-right p-[1px] bg-gradient-to-b from-[#84F729] to-[#15BFFD] flex-shrink-0 flex flex-col items-center"
               style={{ scrollSnapAlign: "start", width: "16rem" }}
             >
-              <div className="bg-gray-800 w-full h-64 rounded-lg p-4 flex flex-col items-center">
+              <div className="bg-gray-800 clip-bottom-right w-full h-64 rounded-lg p-4 flex flex-col items-center">
                 <img
                   src={char.image}
                   alt={char.name}
@@ -84,18 +36,7 @@ const Characters = () => {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Next button */}
-        {canScrollRight && (
-          <button
-            onClick={() => scrollBy("next")}
-            className="absolute right-2 top-1/2 -translate-y-1 bg-white bg-opacity-70 p-2 rounded-full z-10 hover:bg-opacity-90"
-            aria-label="Next"
-          >
-            <FaChevronRight className="text-[#9DFE00]" />
-          </button>
-        )}
+        </ScrollButtons>
       </div>
     </div>
   );
