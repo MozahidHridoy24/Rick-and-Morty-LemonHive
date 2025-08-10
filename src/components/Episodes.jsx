@@ -13,17 +13,17 @@ const Episodes = () => {
   }, []);
 
   return (
-    <div className="p-8">
-      <div className="px-8 py-12">
-        <h2 className="text-2xl text-white font-medium mb-6">Episodes</h2>
+    <div className="md:p-8">
+      <div className="p-6 md:px-8 py-6">
+        <h2 className="text-xl text-white font-normal mb-6">Episodes</h2>
         <ScrollButtons>
           {episodes.map((episode) => (
             <div
               key={episode.id}
-              className="rounded-lg clip-bottom-right p-[1px] bg-gradient-to-b from-[#84F729] to-[#15BFFD] flex-shrink-0 flex flex-col items-center"
-              style={{ scrollSnapAlign: "start", width: "16rem" }}
+              className="rounded-lg w-40 md:w-64 h-24 md:h-30 clip-bottom-right p-[.6px] bg-gradient-to-b from-[#84F729] to-[#15BFFD] flex-shrink-0 flex flex-col items-center"
+              style={{ scrollSnapAlign: "start" }}
             >
-              <div className="bg-gray-800 clip-bottom-right text-white w-full h-24 rounded-lg p-4 flex flex-col items-center">
+              <div className="bg-gray-800 clip-bottom-right text-white w-full h-full rounded-lg p-2 md:p-4 flex flex-col items-center">
                 <p className="w-full text-start">{episode.episode}</p>
                 <h3 className="w-full text-start font-medium text-white">
                   {episode.name}

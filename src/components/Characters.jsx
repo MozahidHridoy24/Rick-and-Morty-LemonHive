@@ -15,13 +15,13 @@ const Characters = () => {
 
   return (
     <div className="px-8">
-      <div className="px-8 py-12 relative">
-        <h2 className="text-2xl text-white font-medium mb-6">Meet The Cast</h2>
+      <div className="px-8 py-6 relative">
+        <h2 className="text-xl text-white font-normal mb-6">Meet The Cast</h2>
         <ScrollButtons>
           {characters.map((char) => (
             <div
               key={char.id}
-              className="rounded-lg clip-bottom-right p-[1px] bg-gradient-to-b from-[#84F729] to-[#15BFFD] flex-shrink-0 flex flex-col items-center"
+              className="rounded-lg clip-bottom-right p-[.5px] bg-gradient-to-b from-[#84F729] to-[#15BFFD] flex-shrink-0 flex flex-col items-center"
               style={{ scrollSnapAlign: "start", width: "16rem" }}
             >
               <div className="bg-gray-800 clip-bottom-right w-full h-64 rounded-lg p-4 flex flex-col items-center">

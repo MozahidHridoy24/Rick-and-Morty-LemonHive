@@ -3,6 +3,7 @@ import Hero from "../components/Hero";
 import bgImage from "../assets/Backgraund.png";
 import Characters from "../components/Characters";
 import Episodes from "../components/Episodes";
+import Locations from "../components/Locations";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <Hero />
       <Characters />
       <Episodes />
+      <Locations />
     </div>
   );
 };
