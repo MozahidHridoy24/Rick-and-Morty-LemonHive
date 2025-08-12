@@ -35,12 +35,13 @@ const CharacterDetails = () => {
   //   console.log("Episode URLs:", character?.episode);
 
   const fetchEpisodes = async (episodeUrls) => {
-    console.log("Starting to fetch episodes", episodeUrls);
+    // console.log("Starting to fetch episodes", episodeUrls);
     setLoadingEpisodes(true);
     try {
       const episodePromises = episodeUrls.map((url) => fetchData(url));
       const episodeData = await Promise.all(episodePromises);
       setEpisodes(episodeData);
+      //   console.log(episodeData);
     } catch (error) {
       console.error("Error fetching episodes:", error);
     } finally {
@@ -48,10 +49,14 @@ const CharacterDetails = () => {
     }
   };
 
-  console.log(episodes);
+  //   console.log(episodes);
 
   if (!character) {
-    return <div className="text-white p-6">Loading...</div>;
+    return (
+      <div className="text-white p-6 min-h-screen flex justify-center items-center">
+        Loading...
+      </div>
+    );
   }
 
   return (
