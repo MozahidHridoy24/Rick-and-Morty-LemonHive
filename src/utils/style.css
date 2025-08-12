@@ -16,3 +16,19 @@
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #374151;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #15bffd;
+  border-radius: 4px;
+}
